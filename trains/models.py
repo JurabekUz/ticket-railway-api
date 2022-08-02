@@ -72,6 +72,7 @@ class Direction(models.Model):
     way = models.CharField(max_length=10) # 076F (bu o'zgarmas, kalit sozga oxshaydi)
 
 class Station(models.Model):
+    direction = models.ForeignKey(Direction, on_delete=models.CASCADE)
     station = models.ForeignKey(City, on_delete=models.CASCADE)
     arrive_time = models.TimeField('kelish vaqti')
     leave_time = models.TimeField('ketish vaqti')
