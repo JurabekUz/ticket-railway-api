@@ -1,0 +1,49 @@
+
+                            e-ticket.railway.uz
+
+            APPS and Models
+core:
+ models - manzilgohlar (buxoro, xiva, qarshi...)
+        - yo'lovchilarga eslatma (chiptalarni xarid qilish qoidalari, imtiyozlar va bonuslar ...)
+        -
+
+accounts:
+ models - User
+
+trains:
+ models - tran( name,type, number, )
+        - direction ( direction m2m,  city, yurish_davomiyligi, bekatda_toxtab_turish_vaqti, bekat_nuber, depart time,  )
+        - reys - ( tran, direction, date, narx, way )
+        #   bunda kunlik vaqtlari togirlash muamo,
+        
+        
+        
+    -------  2  -------------         
+trans:      
+ models - train( name, type, number, ..)
+ 	    - city ( name)
+ 	                /***- vagon ( type, orindiqlar_soni, yuqori, pastki, yon pastki, yon yuqori, kreslo)
+        - bekatlar_narxi - ( bekat-1 F, bekat-2 F, vagon_turi, narxi )
+                    /***- reys_narxi - ( way, tran, bekatlar_narxi m2m)
+        - reys - ( train F, narxi F, way=station.way(property), vagonlar)
+        - station ( name F(city), kelish_vaqti, ketish_vaqti, bekat_nuber, way, )
+        - reys_vagon - ( vagon, vagon raqami, vay)
+        
+        
+        vagon_turlari = ( kreslo-orindiq - E-36/C-26/B-16,)
+        
+        				plaskart da
+        orindiq_turi va soni =(yuqori-18, pastki-18, yon pastki-9, yon yuqori-9,)
+        54 ta joy boladi 
+        
+        				kupe da
+        orindiq_turi va soni =(yuqori-19, pastki-19,)
+        38 ta joy boladi 
+        		
+        				lyuks da
+        orindiq_turi va soni =(pastki-20,)
+        20 ta joy boladi 	
+        
+        
+        
+
