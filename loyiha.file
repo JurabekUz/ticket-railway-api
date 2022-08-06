@@ -1,5 +1,18 @@
 
                             e-ticket.railway.uz
+???
+VoyageListView da
+    price ni filter qilib chiqarish kerak,
+    ticket_price va tarvel_time ni hisoblab chiqarish kerak,
+    type lar boyicha bosh orindiqlarni topish kerak
+
+DetailVoyage da
+    har bitta vagondagi bosh o'rindiqlar raqami/band o'indiqlar
+    type ga qarab narxi,
+    wagon nimerlarini  type boyicha guruhlab chiqarish kerak: { 'Plasskart' :[4,5,6], 'Kupe': [1,2,3] }
+
+
+
 
             APPS and Models
 core:

@@ -13,23 +13,25 @@ class CitySlz(serializers.ModelSerializer):
         fields = ('name',)
 
 class WagonSlz(serializers.ModelSerializer):
+    pass_seats_list = serializers.ListField(required=False)
     class Meta:
         model = Wagon
-        fields = ('way', 'type', 'number')
-
+        fields = ("type", "seat_count", "number", "voyage", 'pass_seats_list')
 class StationPriceSlz(serializers.ModelSerializer):
-    stations = CitySlz(many=True)
+    from_city = CitySlz()
+    to_city = CitySlz()
     class Meta:
         model = StationPrice
-        fields = ('stations', 'wagon_type', 'price')
+        fields = ('from_city','to_city', 'wagon_type', 'price')
 
 class VoyageSlz(serializers.ModelSerializer):
     train = TrainSlz()
     wagons = WagonSlz(many=True)
     price = StationPriceSlz(many=True)
+    free_seats_count = serializers.IntegerField(required=False)
     class Meta:
         model = Voyage
-        fields = ('train', 'wagons', 'price')
+        fields = '__all__'
 
 class StationSlz(serializers.ModelSerializer):
     voyage = VoyageSlz()
@@ -37,6 +39,12 @@ class StationSlz(serializers.ModelSerializer):
     class Meta:
         model = Station
         fields = ('voyage', 'name', 'arrive_time', 'leave_time', 'number')
+
+class OnlyVoyageSlz(serializers.ModelSerializer):
+    train = TrainSlz()
+    class Meta:
+        model = Voyage
+        fields = ( 'name', 'train' )
 
 
 
