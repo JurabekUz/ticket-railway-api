@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from rest_framework.exceptions import ValidationError
+from rest_framework import serializers
 from config.tasks import up_date_seats_count
 from trains.models import Voyage, City, Wagon
 
@@ -37,6 +38,11 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class TicketSlz(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
 
 
 

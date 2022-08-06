@@ -13,10 +13,16 @@ class CitySlz(serializers.ModelSerializer):
         fields = ('name',)
 
 class WagonSlz(serializers.ModelSerializer):
+    class Meta:
+        model = Wagon
+        fields = ("type", "seat_count", "number", "voyage",)
+
+class WagonDetailSlz(serializers.ModelSerializer):
     pass_seats_list = serializers.ListField(required=False)
     class Meta:
         model = Wagon
         fields = ("type", "seat_count", "number", "voyage", 'pass_seats_list')
+
 class StationPriceSlz(serializers.ModelSerializer):
     from_city = CitySlz()
     to_city = CitySlz()

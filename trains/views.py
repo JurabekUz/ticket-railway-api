@@ -2,6 +2,7 @@ from django.db.models import Count, Sum, Value, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.filters import BaseFilterBackend, OrderingFilter
 
@@ -42,6 +43,7 @@ class VoyageListView(ListAPIView):
         #.annotate(wagon = price.filter(from_city=from_city, to_city=to_city) )
 
 class VoyageDetail(APIView):
+    permission_classes = [IsAuthenticated,]
     def get(self, request, pk, *args, **kwargs):
         voyage = Voyage.objects.get(pk=pk)
         serializer = VoyageSlz(voyage)
@@ -75,7 +77,8 @@ class BookedSeatNumbers(APIView): #vagondagi band joylar listi
         })
 
 
-class WagonDetail(APIView): # reys wagon ni haqida batafsil malumot
+class WagonDetail(APIView): # reys wagon ni haqida batafsil malumot #adminlar uchun
+    permission_classes = [IsAdminUser,]
     def get(self, request, pk, number, *args, **kwargs):
         voyage = Voyage.objects.get(pk=pk)
         # current wagon data
